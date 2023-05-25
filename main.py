@@ -1,18 +1,8 @@
-"""import urllib.request
-opener = urllib.request.build_opener()
-response = opener.open("https://httpbin.org/get")
-print(response.read())"""
-
 import  requests
-response = requests.get('https://coinmarketcap.com/')
-"""print(response.text)
-response_parse =  response.text.split('<span>')
-for elem in response_parse:
-    if elem.startswith("$"):
-        print(elem)"""
 from bs4 import BeautifulSoup
+response = requests.get('https://weather.com/uk-UA/weather/'
+                        'today/l/2261b41a35498e667410cb84dfb'
+                        '95d455f977b64d2c02b673df410b7d9ec31ed')
 if response.status_code == 200:
     soup = BeautifulSoup(response.text, features= "html.parser")
-    soup_list = soup.find_all('a', {'href': "/currencies/bitcoin/markets/"})
-    res = soup_list[0].find('span')
-    print(res.text)
+    city = soup.find('h1',{"class":"CurrentConditions--location--1YWj_"})
