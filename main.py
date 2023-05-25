@@ -1,18 +1,11 @@
-"""import urllib.request
-opener = urllib.request.build_opener()
-response = opener.open("https://httpbin.org/get")
-print(response.read())"""
-
 import  requests
-response = requests.get('https://coinmarketcap.com/')
-"""print(response.text)
-response_parse =  response.text.split('<span>')
-for elem in response_parse:
-    if elem.startswith("$"):
-        print(elem)"""
 from bs4 import BeautifulSoup
+response = requests.get('https://www.example.com/')
 if response.status_code == 200:
     soup = BeautifulSoup(response.text, features= "html.parser")
-    soup_list = soup.find_all('a', {'href': "/currencies/bitcoin/markets/"})
-    res = soup_list[0].find('span')
-    print(res.text)
+    soup_list = soup.find_all('a')
+    for link in soup_list:
+        href = link.get('href')
+        print(href)
+        if href.startswith('https://'):
+            print(href)
